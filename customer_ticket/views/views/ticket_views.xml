@@ -1,0 +1,77 @@
+<odoo>
+    <record id="seq_customer_ticket" model="ir.sequence">
+        <field name="name">Customer Ticket Sequence</field>
+        <field name="code">customer.ticket</field>
+        <field name="prefix">TCK-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="view_customer_ticket_form" model="ir.ui.view">
+        <field name="name">customer.ticket.form</field>
+        <field name="model">customer.ticket</field>
+        <field name="arch" type="view">
+            <form string="Ticket">
+                <header>
+                    <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                            attrs="{'invisible': [('stage', '!=', 'delivery')]}"/>
+                    <button name="action_request_change" type="object" string="Request Change" class="btn-danger"
+                            attrs="{'invisible': [('stage', '!=', 'delivery')]}"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"
+                            attrs="{'invisible': [('stage', 'in', ['done', 'cancel'])]}"/>
+                    <field name="stage" widget="statusbar" clickable="True"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="ticket_number"/>
+                        </h1>
+                        <h2>
+                            <field name="name" placeholder="Ticket Subject..."/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_urgent"/>
+                        </group>
+                        <group>
+                            <field name="central_task_id" groups="base.group_no_one"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description and Documents" name="description">
+                            <field name="description" widget="html" options="{'collaborative': true, 'resizable': true}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_customer_ticket_tree" model="ir.ui.view">
+        <field name="name">customer.ticket.list</field>
+        <field name="model">customer.ticket</field>
+        <field name="arch" type="view">
+            <list string="Support Tickets">
+                <field name="ticket_number"/>
+                <field name="name"/>
+                <field name="is_urgent"/>
+                <field name="stage"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="action_customer_ticket" model="ir.actions.act_window">
+        <field name="name">My Tickets</field>
+        <field name="res_model">customer.ticket</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_customer_ticket_root" name="Nametech Support" sequence="100"/>
+    <menuitem id="menu_customer_ticket" name="My Tickets" parent="menu_customer_ticket_root" action="action_customer_ticket" sequence="10"/>
+</odoo>
