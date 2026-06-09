@@ -27,10 +27,16 @@ class CustomerTicket(models.Model):
     ticket_number = fields.Char(string='Ticket No', readonly=True, copy=False, default='New')
 
     @api.model
-    def create(self, vals):
-        if vals.get('ticket_number', 'New') == 'New':
-            vals['ticket_number'] = self.env['ir.sequence'].next_by_code('customer.ticket') or 'TCK-000'
-        return super(CustomerTicket, self).create(vals)
+    def create(self, vals_list):
+        # Eğer vals_list bir liste ise, her bir sözlük için döngüye gir
+        if isinstance(vals_list, dict):
+            vals_list = [vals_list]
+
+        for vals in vals_list:
+            if vals.get('ticket_number', 'New') == 'New':
+                vals['ticket_number'] = self.env['ir.sequence'].next_by_code('customer.ticket') or 'TCK-000'
+
+        return super(CustomerTicket, self).create(vals_list)
 
     def action_approve(self):
         """Trigger to send approval to Central Odoo"""
