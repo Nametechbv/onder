@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_label_small" model="report.paperformat">
+        <field name="name">Small Label</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">70</field>
+        <field name="page_width">100</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_product_label_custom" model="ir.actions.report">
+        <field name="name">Product Label</field>
+        <field name="model">product.template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_label.report_product_label_template</field>
+        <field name="report_file">custom_label.report_product_label_template</field>
+        <field name="print_report_name">'Label - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_label_small"/>
+    </record>
+
+<template id="report_product_label_template">
+    <t t-call="web.basic_layout">
+        <div class="page" style="page-break-inside: avoid;">
+            <t t-foreach="docs" t-as="doc">
+                <div style="width: 100%; height: 65mm; font-family: sans-serif; padding: 5px; border: 1px solid #ccc; overflow: hidden; position: relative; box-sizing: border-box;">
+
+                    <h2 style="margin: 0; font-size: 18px; font-weight: bold; line-height: 1.1;">
+                        <span t-field="doc.name"/>
+                    </h2>
+
+                    <div style="font-size: 12px; margin-top: 2px;">
+                        <span>Bewaren 10 tot 25°C</span>
+                    </div>
+
+                    <div style="margin-top: 5px; line-height: 1.1;">
+                        <span style="font-size: 10px;">Te gebruiken tot:</span><br/>
+                        <span style="font-size: 14px; font-weight: bold;"
+                              t-esc="(context_timestamp(datetime.datetime.now()) + datetime.timedelta(days=doc.x_shelf)).strftime('%d-%m-%Y')"/>
+                    </div>
+
+                    <div style="margin-top: 5px; line-height: 1.1;">
+                        <strong style="font-size: 10px;">Ingredienten:</strong>
+                        <p style="font-size: 9px; margin: 0;" t-field="doc.x_ingredient"/>
+                    </div>
+
+                    <div style="min-height: 20px;"></div>
+
+                    <div style="padding-top: 3px;">
+                        <strong style="font-size: 10px;">Voedingswaarde per 100g:</strong>
+                        <div style="font-size: 9px;" t-field="doc.x_nutrition"/>
+                    </div>
+
+                    <div style="position: absolute; bottom: 5px; left: 5px; width: 95%;">
+                        <div style="font-size: 10px; font-weight: bold;">
+                            <span t-field="res_company.name"/> |
+                            <span t-field="res_company.street"/>, <span t-field="res_company.zip"/> <span t-field="res_company.city"/>
+                        </div>
+                        <div style="font-size: 10px; margin-top: 2px;">
+                            <strong>Lot Nr:</strong> _________________
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</template>
+
+</odoo>
