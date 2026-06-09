@@ -10,7 +10,7 @@
     <record id="view_customer_ticket_form" model="ir.ui.view">
         <field name="name">customer.ticket.form</field>
         <field name="model">customer.ticket</field>
-        <field name="arch" type="view">
+        <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
                     <button name="action_approve" type="object" string="Approve" class="oe_highlight"
@@ -55,7 +55,7 @@
     <record id="view_customer_ticket_tree" model="ir.ui.view">
         <field name="name">customer.ticket.list</field>
         <field name="model">customer.ticket</field>
-        <field name="arch" type="view">
+        <field name="arch" type="xml">
             <list string="Support Tickets">
                 <field name="ticket_number"/>
                 <field name="name"/>
