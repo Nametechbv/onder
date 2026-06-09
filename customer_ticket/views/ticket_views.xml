@@ -13,13 +13,25 @@
         <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
-                    <button name="action_approve" type="object" string="Approve" class="oe_highlight"
-                            attrs="{'invisible': [('stage', '!=', 'delivery')]}"/>
-                    <button name="action_request_change" type="object" string="Request Change" class="btn-danger"
-                            attrs="{'invisible': [('stage', '!=', 'delivery')]}"/>
-                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"
-                            attrs="{'invisible': [('stage', 'in', ['done', 'cancel'])]}"/>
-                    <field name="stage" widget="statusbar" clickable="True"/>
+                    <button name="action_approve"
+                            type="object"
+                            string="Approve"
+                            class="btn-primary"
+                            invisible="stage != 'delivery'"/>
+
+                    <button name="action_request_change"
+                            type="object"
+                            string="Request Change"
+                            class="btn-danger"
+                            invisible="stage != 'delivery'"/>
+
+                    <button name="action_cancel"
+                            type="object"
+                            string="Cancel"
+                            class="btn-secondary"
+                            invisible="stage in ['done', 'cancel']"/>
+
+                    <field name="stage" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
