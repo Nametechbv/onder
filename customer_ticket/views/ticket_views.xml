@@ -42,7 +42,7 @@
                         </h1>
                         <label for="name"/>
                         <h2>
-                            <field name="name" placeholder="Ticket Subject..."/>
+                            <field name="name" placeholder="Ticket Subject..." readonly="id != False"/>
                         </h2>
                     </div>
                     <group>
@@ -55,7 +55,7 @@
                     </group>
                     <notebook>
                         <page string="Description and Documents" name="description">
-                            <field name="description" widget="html" options="{'collaborative': true, 'resizable': true}"/>
+                            <field name="description" widget="html" options="{'collaborative': true, 'resizable': true}" readonly="id != False"/>
                         </page>
                     </notebook>
                 </sheet>
