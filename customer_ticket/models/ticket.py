@@ -12,7 +12,7 @@ class CustomerTicket(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Subject', required=True, tracking=True)
-    description = fields.Html(string='Description', required=True)
+    description = fields.Text(string='Description', required=True)
 
     # 'urgency' alanı boolean olarak güncellendi
     is_urgent = fields.Boolean(string='Is Urgent', default=False, tracking=True)
@@ -33,6 +33,8 @@ class CustomerTicket(models.Model):
     ticket_number = fields.Char(string='Ticket No', readonly=True, copy=False, default='New')
 
     confirmation_note = fields.Char(string='',readonly=True, copy=False, default='Your ticket has been resolved. Please review and approve.')
+    attachment_file = fields.Binary(string='Attachment / Screenshot', attachment=True)
+    attachment_filename = fields.Char(string='Filename')
 
     @api.model
     def create(self, vals_list):
@@ -49,6 +51,12 @@ class CustomerTicket(models.Model):
             vals_list = [vals_list]
 
         for vals in vals_list:
+            if vals.get('attachment_file'):
+                file_size = (len(vals['attachment_file']) * 3) / 4
+                max_size = 2 * 1024 * 1024  # 2 Megabayt
+                if file_size > max_size:
+                    raise ValidationError("File size too large! Screenshots must be a maximum of 2MB.")
+
             if vals.get('ticket_number', 'New') == 'New':
                 vals['ticket_number'] = self.env['ir.sequence'].next_by_code('customer.ticket') or 'TCK-000'
 
@@ -71,6 +79,8 @@ class CustomerTicket(models.Model):
                     "is_urgent": ticket.is_urgent,
                     "customer_ref": alias,
                     "remote_ticket_id": ticket.id
+                    "attachment_file": ticket.attachment_file.decode('utf-8') if ticket.attachment_file else False,
+                    "attachment_filename": ticket.attachment_filename or "ekran_goruntusu.png"
                 }
             }
             try:

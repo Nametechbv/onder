@@ -55,7 +55,8 @@
                     </group>
                     <notebook>
                         <page string="Description and Documents" name="description">
-                            <field name="description" widget="html" options="{'collaborative': true, 'resizable': true}" readonly="id != False"/>
+                            <field name="description" readonly="id != False"/>
+                            <field name="attachment_file" filename="attachment_filename" widget="binary" string="Ekran Görüntüsü / Dosya"/>
                         </page>
                     </notebook>
                 </sheet>

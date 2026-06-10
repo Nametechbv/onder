@@ -27,13 +27,13 @@ class CustomerTicketWizard(models.TransientModel):
         current_date = fields.Datetime.context_timestamp(self, fields.Datetime.now()).strftime('%Y-%m-%d %H:%M')
 
         if self.action_type == 'change':
-            formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Revision Requested Reason - {current_date}]:</strong> {self.reason}"
+            formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Revision Requested- {current_date}]:</strong> {self.reason}"
 
             self.ticket_id.write({
                 'stage': 'change',
                 'description': formatted_reason
             })
-            self.ticket_id._call_central_api_respond('reject', f"{self.reason} ({current_date})")
+            self.ticket_id._call_central_api_respond('reject', f"{self.reason} [{current_date}]")
         elif self.action_type == 'cancel':
 
             formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Cancellation Reason - {current_date}]:</strong> {self.reason}"
@@ -44,5 +44,5 @@ class CustomerTicketWizard(models.TransientModel):
                 'description': formatted_reason
             })
 
-            self.ticket_id._call_central_api_respond('cancel', f"{self.reason} ({current_date})")
+            self.ticket_id._call_central_api_respond('cancel', f"{self.reason} [{current_date}]")
         return {'type': 'ir.actions.act_window_close'}
