@@ -86,7 +86,7 @@ class CustomerTicket(models.Model):
 
         return tickets
 
-    def _call_central_api_respond(self, action):
+    def _call_central_api_respond(self, action, reason=""):
         central_url = self.env['ir.config_parameter'].sudo().get_param('central_odoo.url_respond',
                                                                        'https://rubixb2.com/api/ticket/respond')
         api_token = self.env['ir.config_parameter'].sudo().get_param('central_odoo.token', 'RespondTicket2026')
@@ -94,7 +94,8 @@ class CustomerTicket(models.Model):
         payload = {
             "params": {
                 "central_task_id": self.central_task_id,
-                "action": action
+                "action": action,
+                "reason": reason
             }
         }
         try:
@@ -108,15 +109,25 @@ class CustomerTicket(models.Model):
         self.write({'stage': 'done'})
         self._call_central_api_respond('approve')
 
-    def action_request_change(self):
-        """Trigger to send change request to Central Odoo"""
-        self.write({'stage': 'change'})
-        self._call_central_api_respond('reject')
+    def action_open_change_wizard(self):
+        return {
+            'name': 'Request Change',
+            'type': 'ir.actions.act_window',
+            'res_model': 'customer.ticket.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_ticket_id': self.id, 'default_action_type': 'change'}
+        }
 
-    def action_cancel(self):
-        """Trigger to cancel the ticket"""
-        self.write({'stage': 'cancel'})
-        self._call_central_api_respond('cancel')
+    def action_open_cancel_wizard(self):
+        return {
+            'name': 'Cancel Ticket',
+            'type': 'ir.actions.act_window',
+            'res_model': 'customer.ticket.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_ticket_id': self.id, 'default_action_type': 'cancel'}
+        }
 
     @api.model
     def cron_pull_stage_updates(self):
