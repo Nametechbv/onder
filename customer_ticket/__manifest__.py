@@ -20,6 +20,7 @@
         'security/ir.model.access.csv',
         'views/ticket_views.xml',
         'data/ir_cron.xml',
+        'wizard/ticket_wizard_view.xml',
     ],
     'installable': True,
     'application': True,
