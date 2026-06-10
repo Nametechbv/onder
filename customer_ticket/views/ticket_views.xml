@@ -68,7 +68,7 @@
         <field name="model">customer.ticket</field>
         <field name="arch" type="xml">
             <list string="Support Tickets">
-                <field name="is_urgent" widget="priority"/>
+                <field name="is_urgent" widget="boolean_favorite" nolabel="1"/>
                 <field name="ticket_number"/>
                 <field name="name"/>
                 <field name="stage"/>
