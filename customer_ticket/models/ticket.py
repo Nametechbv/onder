@@ -1,6 +1,7 @@
 import requests
 import logging
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 alias = "onder"
@@ -35,6 +36,14 @@ class CustomerTicket(models.Model):
 
     @api.model
     def create(self, vals_list):
+        today = fields.Date.today()
+        daily_count = self.search_count([
+            ('create_uid', '=', self.env.user.id),
+            ('create_date', '>=', today)
+        ])
+        if daily_count + len(vals_list) > 3:
+            raise ValidationError("Security Limit: You cannot open more than 3 tickets per day.")
+
         # Eğer vals_list bir liste ise, her bir sözlük için döngüye gir
         if isinstance(vals_list, dict):
             vals_list = [vals_list]

@@ -72,7 +72,7 @@
                 <field name="name"/>
                 <field name="is_urgent"/>
                 <field name="stage"/>
-                <field name="confirmation_note" invisible="stage != 'delivery'"/>
+                <field name="confirmation_note" decoration-success="1" invisible="stage != 'delivery'"/>
             </list>
         </field>
     </record>
