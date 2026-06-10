@@ -24,10 +24,25 @@ class CustomerTicketWizard(models.TransientModel):
 
     def action_submit(self):
         self.ensure_one()
+        current_date = fields.Date.today().strftime('%Y-%m-%d')
+
         if self.action_type == 'change':
-            self.ticket_id.write({'stage': 'change'})
-            self.ticket_id._call_central_api_respond('reject', self.reason)
+            formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Revision Requested Reason - {current_date}]:</strong> {self.reason}"
+
+            self.ticket_id.write({
+                'stage': 'change',
+                'description': formatted_reason
+            })
+            self.ticket_id._call_central_api_respond('reject', f"{self.reason} ({current_date})")
         elif self.action_type == 'cancel':
-            self.ticket_id.write({'stage': 'cancel'})
-            self.ticket_id._call_central_api_respond('cancel', self.reason)
+
+            formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Cancellation Reason - {current_date}]:</strong> {self.reason}"
+
+            # Update local ticket stage and description
+            self.ticket_id.write({
+                'stage': 'cancel',
+                'description': formatted_reason
+            })
+
+            self.ticket_id._call_central_api_respond('cancel', f"{self.reason} ({current_date})")
         return {'type': 'ir.actions.act_window_close'}

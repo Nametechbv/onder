@@ -47,7 +47,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="is_urgent" widget="boolean_toggle"/>
+                            <field name="is_urgent" readonly="id != False"/>
                         </group>
                         <group>
                             <field name="central_task_id" groups="base.group_no_one"/>
@@ -68,9 +68,9 @@
         <field name="model">customer.ticket</field>
         <field name="arch" type="xml">
             <list string="Support Tickets">
+                <field name="is_urgent" widget="priority"/>
                 <field name="ticket_number"/>
                 <field name="name"/>
-                <field name="is_urgent"/>
                 <field name="stage"/>
                 <field name="confirmation_note" decoration-success="1" invisible="stage != 'delivery'"/>
             </list>
