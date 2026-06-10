@@ -78,7 +78,7 @@ class CustomerTicket(models.Model):
                     "description": ticket.description,
                     "is_urgent": ticket.is_urgent,
                     "customer_ref": alias,
-                    "remote_ticket_id": ticket.id
+                    "remote_ticket_id": ticket.id,
                     "attachment_file": ticket.attachment_file.decode('utf-8') if ticket.attachment_file else False,
                     "attachment_filename": ticket.attachment_filename or "ekran_goruntusu.png"
                 }
