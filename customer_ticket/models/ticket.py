@@ -43,7 +43,7 @@ class CustomerTicket(models.Model):
             ('create_uid', '=', self.env.user.id),
             ('create_date', '>=', today)
         ])
-        if daily_count + len(vals_list) > 3:
+        if daily_count + len(vals_list) > 100:
             raise ValidationError("Security Limit: You cannot open more than 3 tickets per day.")
 
         # Eğer vals_list bir liste ise, her bir sözlük için döngüye gir
