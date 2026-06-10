@@ -24,7 +24,7 @@ class CustomerTicketWizard(models.TransientModel):
 
     def action_submit(self):
         self.ensure_one()
-        current_date = fields.Date.today().strftime('%Y-%m-%d')
+        current_date = fields.Datetime.context_timestamp(self, fields.Datetime.now()).strftime('%Y-%m-%d %H:%M')
 
         if self.action_type == 'change':
             formatted_reason = f"{self.ticket_id.description or ''}<br/><hr/><strong>[Revision Requested Reason - {current_date}]:</strong> {self.reason}"
