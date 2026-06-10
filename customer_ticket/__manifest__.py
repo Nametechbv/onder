@@ -1,6 +1,6 @@
 {
     'name': 'Customer Support Ticket',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Services',
     'summary': 'Müşteri destek talepleri için bilet yönetimi modülü.',
     'description': """
@@ -19,6 +19,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/ticket_views.xml',
+        'data/ir_cron.xml',
     ],
     'installable': True,
     'application': True,
