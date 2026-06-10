@@ -23,7 +23,7 @@
                         <button name="action_request_change"
                                 type="object"
                                 string="Request Change"
-                                class="btn-danger"
+                                class="btn-warning"
                                 invisible="stage != 'delivery'"/>
 
                         <button name="action_cancel"
@@ -72,6 +72,7 @@
                 <field name="name"/>
                 <field name="is_urgent"/>
                 <field name="stage"/>
+                <field name="confirmation_note" invisible="stage != 'delivery'"/>
             </list>
         </field>
     </record>

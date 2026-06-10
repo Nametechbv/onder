@@ -31,6 +31,8 @@ class CustomerTicket(models.Model):
     central_task_id = fields.Integer(string='Central Task ID', readonly=True)
     ticket_number = fields.Char(string='Ticket No', readonly=True, copy=False, default='New')
 
+    confirmation_note = fields.Char(string='',readonly=True, copy=False, default='Your ticket has been resolved. Please review and approve.')
+
     @api.model
     def create(self, vals_list):
         # Eğer vals_list bir liste ise, her bir sözlük için döngüye gir
