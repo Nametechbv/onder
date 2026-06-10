@@ -2,7 +2,7 @@
     <record id="view_customer_ticket_wizard_form" model="ir.ui.view">
         <field name="name">customer.ticket.wizard.form</field>
         <field name="model">customer.ticket.wizard</field>
-        <field name="arch" type="view">
+        <field name="arch" type="xml">
             <form string="Ticket Action">
                 <sheet>
                     <div class="alert alert-info" role="alert">
