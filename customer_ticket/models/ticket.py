@@ -15,7 +15,7 @@ class CustomerTicket(models.Model):
     description = fields.Text(string='Description', required=True)
 
     # 'urgency' alanı boolean olarak güncellendi
-    is_urgent = fields.Boolean(string='Is Urgent', default=False, tracking=True)
+    is_urgent = fields.Boolean(string='Urgent', default=False, tracking=True)
 
     # 'stage' alanı güncellendi: 'change' eklendi, 'cancel' iptal anlamını taşıyacak
     stage = fields.Selection([
