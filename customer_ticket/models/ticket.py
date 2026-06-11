@@ -32,7 +32,7 @@ class CustomerTicket(models.Model):
     central_task_id = fields.Integer(string='Central Task ID', readonly=True)
     ticket_number = fields.Char(string='Ticket No', readonly=True, copy=False, default='New')
 
-    confirmation_note = fields.Char(string='',readonly=True, copy=False, default='Your ticket has been resolved. Please review and approve.')
+    confirmation_status = fields.Char(string='Support Note', readonly=True)
     attachment_file = fields.Binary(string='Attachment / Screenshot', attachment=True)
     attachment_filename = fields.Char(string='Filename')
 
@@ -173,6 +173,7 @@ class CustomerTicket(models.Model):
                         central_stage = result.get('stage_name', '').lower().strip()
                         central_state = result.get('state')
                         is_active = result.get('active', True)
+                        central_note = result.get('client_note', '')
 
                         target_stage = False
 
@@ -188,9 +189,16 @@ class CustomerTicket(models.Model):
                         if not target_stage:
                             target_stage = stage_name_mapping.get(central_stage)
 
-                        # Apply stage update if it differs from current
+                        vals_to_write = {}
+
                         if target_stage and ticket.stage != target_stage:
-                            ticket.write({'stage': target_stage})
+                            vals_to_write['stage'] = target_stage
+
+                        if ticket.confirmation_status != central_note:
+                            vals_to_write['confirmation_status'] = central_note
+
+                        if vals_to_write:
+                            ticket.write(vals_to_write)
 
             except Exception as e:
                 _logger.error(f"Pull cron failed for ticket ID {ticket.id}: {str(e)}")

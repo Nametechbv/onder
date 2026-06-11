@@ -72,8 +72,15 @@
                 <field name="is_urgent" widget="boolean_favorite" nolabel="1"/>
                 <field name="ticket_number"/>
                 <field name="name"/>
-                <field name="stage"/>
-                <field name="confirmation_note" decoration-success="1" invisible="stage != 'delivery'"/>
+                <field name="stage" widget="badge"
+                       decoration-muted="stage == 'draft'"
+                       decoration-primary="stage == 'process'"
+                       decoration-warning="stage == 'on_hold'"
+                       decoration-info="stage == 'review'"
+                       decoration-success="stage in ('delivery', 'done')"
+                       decoration-danger="stage == 'cancel'"/>
+                <field name="confirmation_status" readonly="1"/>
+                <field name="write_date"/>
             </list>
         </field>
     </record>
