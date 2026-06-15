@@ -73,11 +73,11 @@
                 <field name="name" string="Subject"/>
                 <field name="ticket_number" string="Ticket No"/>
 
-                <!-- Hızlı Filtreler -->
+                <!-- Hızlı Filtreler
                 <filter string="Open Tickets"
                     name="filter_open_tickets"
                     domain="[('stage', 'not in', ['done', 'cancel'])]"/>
-                <separator/>
+                <separator/> -->
                 <filter string="Approved" name="filter_approved" domain="[('stage', '=', 'done')]"/>
                 <filter string="Canceled" name="filter_canceled" domain="[('stage', '=', 'cancel')]"/>
                 <filter string="In Process" name="filter_process" domain="[('stage', '=', 'process')]"/>
@@ -130,8 +130,9 @@
         <field name="name">My Tickets</field>
         <field name="res_model">customer.ticket</field>
         <field name="view_mode">list,form</field>
+        <!--
         <field name="context">{'search_default_filter_open_tickets': 1}</field>
-        <field name="search_view_id" ref="view_customer_ticket_search"/>
+        <field name="search_view_id" ref="view_customer_ticket_search"/> -->
     </record>
 
     <menuitem id="menu_customer_ticket_root" name="Nametech Support" sequence="100"/>
