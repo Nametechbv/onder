@@ -12,7 +12,7 @@ class CustomerTicket(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Subject', required=True, tracking=True)
-    description = fields.Text(string='Description', required=True)
+    description = fields.Html(string='Description', required=True)
 
     # 'urgency' alanı boolean olarak güncellendi
     is_urgent = fields.Boolean(string='Urgent', default=False, tracking=True)
