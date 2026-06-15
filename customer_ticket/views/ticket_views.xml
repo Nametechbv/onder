@@ -64,14 +64,14 @@
         </field>
     </record>
 
-<!--    <record id="view_customer_ticket_search" model="ir.ui.view">-->
-<!--        <field name="name">customer.ticket.search</field>-->
-<!--        <field name="model">customer.ticket</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                &lt;!&ndash; Arama kutusuna yazınca hangi alanlarda arasın? &ndash;&gt;-->
-<!--                <field name="name" string="Subject"/>-->
-<!--                <field name="ticket_number" string="Ticket No"/>-->
+    <record id="view_customer_ticket_search" model="ir.ui.view">
+        <field name="name">customer.ticket.search</field>
+        <field name="model">customer.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Arama kutusuna yazınca hangi alanlarda arasın? -->
+                <field name="name" string="Subject"/>
+                <field name="ticket_number" string="Ticket No"/>
 
 <!--                &lt;!&ndash; Hızlı Filtreler-->
 <!--                <filter string="Open Tickets"-->
@@ -90,9 +90,9 @@
 <!--                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>-->
 <!--                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>-->
 <!--                </group>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record> -->
+            </search>
+        </field>
+    </record>
 
     <record id="view_customer_ticket_tree" model="ir.ui.view">
         <field name="name">customer.ticket.list</field>
