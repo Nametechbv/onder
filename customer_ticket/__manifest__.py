@@ -25,4 +25,5 @@
     'installable': True,
     'application': True,
     'auto_install': False,
+    'icon': '/customer_ticket/static/description/icon.png',
 }

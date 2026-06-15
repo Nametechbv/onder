@@ -77,9 +77,9 @@
                 <filter string="Open Tickets"
                     name="filter_open_tickets"
                     domain="[('stage', 'not in', ['done', 'cancel'])]"/>
-                <separator/>
                 <filter string="Approved" name="filter_approved" domain="[('stage', '=', 'done')]"/>
                 <filter string="Canceled" name="filter_canceled" domain="[('stage', '=', 'cancel')]"/>
+                <separator/>
                 <filter string="In Process" name="filter_process" domain="[('stage', '=', 'process')]"/>
                 <filter string="On Hold" name="filter_hold" domain="[('stage', '=', 'on_hold')]"/>
                 <separator/>
