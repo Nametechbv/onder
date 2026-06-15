@@ -140,7 +140,7 @@ class CustomerTicket(models.Model):
         }
 
     @api.model
-    def cron_pull_stage_updates(self):
+    def cron_pull_stage_updates(self, *args, **kwargs):
         """Scheduled action logic to pull stage modifications from Central Odoo"""
         active_tickets = self.search([('stage', 'not in', ['done', 'cancel'])])
         if not active_tickets:
