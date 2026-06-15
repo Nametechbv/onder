@@ -85,11 +85,11 @@
 <!--                <separator/>-->
 <!--                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>-->
 
-<!--                &lt;!&ndash; Gruplama Seçenekleri &ndash;&gt;-->
-<!--                <group expand="0" string="Group By">-->
-<!--                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>-->
-<!--                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>-->
-<!--                </group>-->
+                <!-- Gruplama Seçenekleri -->
+                <group expand="0" string="Group By">
+                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>
+                </group>
             </search>
         </field>
     </record>
