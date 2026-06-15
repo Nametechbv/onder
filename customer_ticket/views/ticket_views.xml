@@ -64,35 +64,35 @@
         </field>
     </record>
 
-    <record id="view_customer_ticket_search" model="ir.ui.view">
-        <field name="name">customer.ticket.search</field>
-        <field name="model">customer.ticket</field>
-        <field name="arch" type="xml">
-            <search>
-                <!-- Arama kutusuna yazınca hangi alanlarda arasın? -->
-                <field name="name" string="Subject"/>
-                <field name="ticket_number" string="Ticket No"/>
+<!--    <record id="view_customer_ticket_search" model="ir.ui.view">-->
+<!--        <field name="name">customer.ticket.search</field>-->
+<!--        <field name="model">customer.ticket</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search>-->
+<!--                &lt;!&ndash; Arama kutusuna yazınca hangi alanlarda arasın? &ndash;&gt;-->
+<!--                <field name="name" string="Subject"/>-->
+<!--                <field name="ticket_number" string="Ticket No"/>-->
 
-                <!-- Hızlı Filtreler
-                <filter string="Open Tickets"
-                    name="filter_open_tickets"
-                    domain="[('stage', 'not in', ['done', 'cancel'])]"/>
-                <separator/> -->
-                <filter string="Approved" name="filter_approved" domain="[('stage', '=', 'done')]"/>
-                <filter string="Canceled" name="filter_canceled" domain="[('stage', '=', 'cancel')]"/>
-                <filter string="In Process" name="filter_process" domain="[('stage', '=', 'process')]"/>
-                <filter string="On Hold" name="filter_hold" domain="[('stage', '=', 'on_hold')]"/>
-                <separator/>
-                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+<!--                &lt;!&ndash; Hızlı Filtreler-->
+<!--                <filter string="Open Tickets"-->
+<!--                    name="filter_open_tickets"-->
+<!--                    domain="[('stage', 'not in', ['done', 'cancel'])]"/>-->
+<!--                <separator/> &ndash;&gt;-->
+<!--                <filter string="Approved" name="filter_approved" domain="[('stage', '=', 'done')]"/>-->
+<!--                <filter string="Canceled" name="filter_canceled" domain="[('stage', '=', 'cancel')]"/>-->
+<!--                <filter string="In Process" name="filter_process" domain="[('stage', '=', 'process')]"/>-->
+<!--                <filter string="On Hold" name="filter_hold" domain="[('stage', '=', 'on_hold')]"/>-->
+<!--                <separator/>-->
+<!--                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>-->
 
-                <!-- Gruplama Seçenekleri -->
-                <group expand="0" string="Group By">
-                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>
-                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<!--                &lt;!&ndash; Gruplama Seçenekleri &ndash;&gt;-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>-->
+<!--                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record> -->
 
     <record id="view_customer_ticket_tree" model="ir.ui.view">
         <field name="name">customer.ticket.list</field>
