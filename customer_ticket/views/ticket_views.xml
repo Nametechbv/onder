@@ -69,6 +69,14 @@
         <field name="model">customer.ticket</field>
         <field name="arch" type="xml">
             <list string="Support Tickets">
+                <header>
+                <button name="cron_pull_stage_updates"
+                        type="object"
+                        string="Refresh"
+                        class="btn-primary"
+                        icon="fa-refresh"/>
+            </header>
+
                 <field name="is_urgent" widget="boolean_favorite" nolabel="1"/>
                 <field name="ticket_number"/>
                 <field name="name"/>

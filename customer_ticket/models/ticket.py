@@ -144,7 +144,7 @@ class CustomerTicket(models.Model):
         """Scheduled action logic to pull stage modifications from Central Odoo"""
         active_tickets = self.search([('stage', 'not in', ['done', 'cancel'])])
         if not active_tickets:
-            return
+            return {'type': 'ir.actions.client', 'tag': 'reload'}
 
         central_url = self.env['ir.config_parameter'].sudo().get_param('central_odoo.url_get_stage',
                                                                        'https://rubixb2.com/api/ticket/get_stage')
@@ -202,3 +202,8 @@ class CustomerTicket(models.Model):
 
             except Exception as e:
                 _logger.error(f"Pull cron failed for ticket ID {ticket.id}: {str(e)}")
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload'
+        }
