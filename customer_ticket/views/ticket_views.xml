@@ -70,8 +70,8 @@
         <field name="arch" type="xml">
             <search>
                 <!-- Arama kutusuna yazınca hangi alanlarda arasın? -->
-                <field name="name"/>
-                <field name="ticket_number"/>
+                <field name="name" string="Subject"/>
+                <field name="ticket_number" string="Ticket No"/>
 
                 <!-- Hızlı Filtreler -->
                 <filter string="Open Tickets"
