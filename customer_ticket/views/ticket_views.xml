@@ -87,8 +87,8 @@
 
                 <!-- Gruplama Seçenekleri -->
                 <group string="Group By">
-                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>
-<!--                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>-->
+<!--                    <filter string="Stage" name="group_by_stage" context="{'group_by': 'stage'}"/>-->
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'create_date:year'}"/>
                 </group>
             </search>
         </field>
