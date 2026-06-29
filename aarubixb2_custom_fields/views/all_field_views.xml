@@ -1,0 +1,168 @@
+<odoo>
+ <data>
+  <!-- Product Template Fields -->
+  <record id="product_template_form_inherit_extra_page" model="ir.ui.view">
+   <field name="name">product.template.form.inherit.extra.page</field>
+   <field name="model">product.template</field>
+   <field name="inherit_id" ref="product.product_template_only_form_view"/>
+   <field name="arch" type="xml">
+     <xpath expr="//notebook" position="inside">
+       <page string="Ek Bilgiler">
+         <group>
+          <field name="x_vergi"/>
+          <field name="x_tadim"/>
+         </group>
+       </page>
+     </xpath>
+   </field>
+  </record>
+ 
+  <!-- Users Fields -->
+  <record id="view_users_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">res.users.form.inherit.xfields.page</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+         <field name="x_tum_musteri"/>
+         <field name="x_tedarik_depo"/>
+         <field name="x_tadim"/>
+         <field name="x_picking_type"/>
+         <field name="x_iskonto"/>
+         <field name="x_in_route"/>
+         <field name="x_discount_limit"/>
+         <field name="x_depo"/>
+        </group>
+       </page>
+      </xpath>
+    </field>
+  </record> 
+ 
+  <!-- Sale Order Fields -->
+  <record id="view_order_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">sale.order.form.inherit.xfields.page</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page string="Ek Alanlar">
+         <group>
+          <field name="x_toplam_iskonto"/>
+          <field name="x_offer"/>
+          <field name="x_iskonto"/>
+         </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+ 
+   <!-- Sale Order Line Fields -->
+  <record id="view_order_line_tree_inherit_xfields" model="ir.ui.view">
+    <field name="name">sale.order.line.tree.inherit.xfields</field>
+    <field name="model">sale.order.line</field>
+    <field name="inherit_id" ref="sale.view_order_line_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_uom']" position="after">
+       
+         <field name="x_pallettype"/>
+         <field name="x_pallet"/>
+         <field name="x_iskonto"/>
+         <field name="x_count"/>
+         <field name="x_birim"/>
+      
+      </xpath>
+    </field>
+  </record>
+ 
+   <!-- Contact (res.partner) Fields -->
+  <record id="view_partner_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">res.partner.form.inherit.xfields.page</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+        <field name="x_partner_code"/>
+        <field name="x_price_list" readonly="1"/>
+        <field name="x_iskonto"/>
+        <field name="x_invoice_limit"/>
+        <field name="x_frequency"/>
+         </group>
+        </page>                         
+      </xpath>
+    </field>
+  </record>
+ 
+  <!-- Stock Picking (Transfer) Fields -->
+  <record id="view_picking_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">stock.picking.form.inherit.xfields.page</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+        <field name="x_paket1" readonly="1"/>
+        <field name="x_paket" readonly="1"/>
+        </group>
+       </page>
+      </xpath>
+    </field>
+  </record>
+ 
+ <!-- Account Move (Journal Entry) Fields -->
+  <record id="view_move_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">account.move.form.inherit.xfields.page</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+        <field name="x_partner_user" readonly="1"/>
+        <field name="x_inroute"/>
+        <field name="x_box" readonly="1"/>
+        </group>
+       </page>
+      </xpath>
+    </field>
+  </record>
+ 
+ <!-- Account Move Line (Journal Item) Fields -->
+  <record id="view_move_line_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">account.move.line.form.inherit.xfields.page</field>
+    <field name="model">account.move.line</field>
+    <field name="inherit_id" ref="account.view_move_line_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+        <field name="x_count" readonly="1"/>
+        <field name="x_birim" readonly="1"/>
+        </group>
+       </page>
+      </xpath>
+    </field>
+  </record>
+ 
+   <!-- Res Company Fields -->
+  <record id="view_company_form_inherit_xfields_page" model="ir.ui.view">
+    <field name="name">res.company.form.inherit.xfields.page</field>
+    <field name="model">res.company</field>
+    <field name="inherit_id" ref="base.view_company_form"/>
+    <field name="arch" type="xml">
+     <xpath expr="//notebook" position="inside">
+       <page string="Ek Alanlar">
+        <group>
+        <field name="x_fatura_logo" filename="x_fatura_logo_filename"/>
+        </group>
+       </page>
+      </xpath>
+    </field>
+  </record>
+ 
+ </data>
+</odoo>
