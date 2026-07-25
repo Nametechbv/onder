@@ -77,6 +77,15 @@
             </attribute>
         </xpath>
     </template>
+
+    <template id="product_price_section_hide" inherit_id="website_sale.product">
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="attributes">
+            <attribute name="t-if">
+                not is_view_active('website_sale.cta_wrapper_boxed') and (not request.env.user._is_public() or (request.env.user._is_public() and show_price))
+            </attribute>
+        </xpath>
+    </template>
+
     <!--    Hide Price in Search box content  -->
     <template id="website_search_box_input_hide_price" inherit_id="website.website_search_box_input">
         <xpath expr="//input[@name='search']" position="attributes">
