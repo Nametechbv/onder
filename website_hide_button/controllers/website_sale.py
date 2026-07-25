@@ -39,10 +39,19 @@ class WebsiteSaleInherit(WebsiteSale):
         """Method for finding log in user or not in shop page """
         res = super().shop(page, category, search, min_price,
                            max_price, ppg, **post)
+
+        # Ayarları veritabanından güvenli bir şekilde çekiyoruz. (Odoo'da get_param string dönebilir)
+        hide_cart_setting = request.env['ir.config_parameter'].sudo().get_param(
+            'website_hide_button.hide_cart') == 'True'
+        hide_price_setting = request.env['ir.config_parameter'].sudo().get_param(
+            'website_hide_button.hide_price') == 'True'
+
         res.qcontext.update({
-            'login_user': True if request.env.user._is_public() and request.env[
-                'ir.config_parameter'].sudo().get_param(
-                'website_hide_button.hide_cart') else False
+            # Eğer kullanıcı misafirse VE gizleme ayarı açıksa True döner (Uyarıyı gösterir)
+            'login_user': True if request.env.user._is_public() and hide_cart_setting else False,
+
+            # Eğer fiyat gizleme ayarı KAPALIYSA True döner (XML'deki show_price artık buna bakacak)
+            'show_price': not hide_price_setting
         })
         return res
 
@@ -51,10 +60,13 @@ class WebsiteSaleInherit(WebsiteSale):
         res = super(WebsiteSaleInherit, self)._prepare_product_values(product,
                                                                       category,
                                                                       **kwargs)
-        res['login_user'] = True if request.env.user._is_public() and \
-                                    request.env[
-                                        'ir.config_parameter'].sudo().get_param(
-                                        'website_hide_button.hide_cart') else False
+        hide_cart_setting = request.env['ir.config_parameter'].sudo().get_param(
+            'website_hide_button.hide_cart') == 'True'
+        hide_price_setting = request.env['ir.config_parameter'].sudo().get_param(
+            'website_hide_button.hide_price') == 'True'
+
+        res['login_user'] = True if request.env.user._is_public() and hide_cart_setting else False
+        res['show_price'] = not hide_price_setting
         return res
 
     @http.route()
@@ -62,13 +74,10 @@ class WebsiteSaleInherit(WebsiteSale):
         """  Restrict public visitors from accessing payment page so that SO
         creation will be disabled   """
         user = http.request.env.user
-        if (
-                not user._is_public() or user._is_public() and not request.env.user._is_public() and not
-        request.env[
-            'ir.config_parameter'].sudo().get_param(
-            'website_hide_button.hide_cart')) and user.has_group(
-            'base.group_portal') or \
-                user.has_group('base.group_user'):
-            res = super(WebsiteSaleInherit, self).shop_payment(**post)
-            return res
+        hide_cart_setting = request.env['ir.config_parameter'].sudo().get_param(
+            'website_hide_button.hide_cart') == 'True'
+
+        if (not user._is_public() or (user._is_public() and not hide_cart_setting)) and \
+                (user.has_group('base.group_portal') or user.has_group('base.group_user')):
+            return super(WebsiteSaleInherit, self).shop_payment(**post)
         return request.redirect("/")
