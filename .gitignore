@@ -1,4 +1,96 @@
-.idea/
-*.pyc
+# ==========================================
+# Odoo & Python Özel Kuralları
+# ==========================================
+# Python derlenmiş dosyaları ve önbellekler
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Odoo veri/oturum klasörleri ve filestore
+.data/
+.filestore/
+sessions/
+addons-data/
+
+# Odoo log dosyaları
 *.log
+odoo.log
+odoo-server.log
+
+# Sanal Ortamlar (Virtual Environments)
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment değişkenleri ve sır dosyaları (API key, şifreler vb.)
+.env
+.env.local
+.env.dev
+.env.prod
+
+# Docker Veri Kalıntıları
+docker-data/
+pgdata/
+
+# ==========================================
+# Editör ve IDE Ayarları
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm / IntelliJ / JetBrains
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim / Emacs
+*~
+*.swp
+*.swo
+\#*\#
+
+# ==========================================
+# İşletim Sistemi Kalıntıları
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ==========================================
+# Test & Araç Kalıntıları
+# ==========================================
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
